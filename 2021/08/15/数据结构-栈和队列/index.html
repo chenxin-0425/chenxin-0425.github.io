@@ -1,0 +1,237 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>数据结构-栈和队列 | Shea Chen</title><meta name="keywords" content="学习笔记,数据结构,栈和队列"><meta name="author" content="Shea Chen"><meta name="copyright" content="Shea Chen"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="数据结构学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构-栈和队列">
+<meta property="og:url" content="https://gitee.com/chen-xin-99/personal-blog/2021/08/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/index.html">
+<meta property="og:site_name" content="Shea Chen">
+<meta property="og:description" content="数据结构学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/chen-xin-99/personal-blog/picture/158.jpg">
+<meta property="article:published_time" content="2021-08-15T09:14:47.000Z">
+<meta property="article:modified_time" content="2021-08-15T09:32:16.585Z">
+<meta property="article:author" content="Shea Chen">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/chen-xin-99/personal-blog/picture/158.jpg"><link rel="shortcut icon" href="/personal-blog/img/favicon.png"><link rel="canonical" href="https://gitee.com/chen-xin-99/personal-blog/2021/08/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><link rel="stylesheet" href="/personal-blog/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/personal-blog/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '数据结构-栈和队列',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-08-15 17:32:16'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/font_2725053_mosafnfvf8d.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/personal-blog/picture/touxiang.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/personal-blog/archives/"><div class="headline">文章</div><div class="length-num">5</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/personal-blog/tags/"><div class="headline">标签</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/personal-blog/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/personal-blog/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/personal-blog/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/personal-blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/personal-blog/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/personal-blog/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/personal-blog/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/personal-blog/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/personal-blog/picture/158.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/personal-blog/">Shea Chen</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/personal-blog/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/personal-blog/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/personal-blog/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/personal-blog/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/personal-blog/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/personal-blog/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/personal-blog/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">数据结构-栈和队列</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-08-15T09:14:47.000Z" title="发表于 2021-08-15 17:14:47">2021-08-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-08-15T09:32:16.585Z" title="更新于 2021-08-15 17:32:16">2021-08-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/personal-blog/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/personal-blog/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/personal-blog/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/">栈和队列</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="数据结构-栈和队列"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="一、栈"><a href="#一、栈" class="headerlink" title="一、栈"></a>一、栈</h1><h2 id="1、栈的基本概念"><a href="#1、栈的基本概念" class="headerlink" title="1、栈的基本概念"></a>1、栈的基本概念</h2><p>线性表是具有相同数据类型的n（n≥0）个数据元素的有限 序列，其中n为表长，当n = 0时线<br>性表是一个空表。若用L命名线性表，则其一般表示为<br>L = (a1, a2, … , ai, ai+1, … , an)<br>栈（Stack）是只允许在一端进行插入或删除操作的线性表<br><img src="https://upload-images.jianshu.io/upload_images/18479331-1e28ad17e610949a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="栈"></p>
+<h3 id="栈的基本操作"><a href="#栈的基本操作" class="headerlink" title="栈的基本操作"></a>栈的基本操作</h3><p>InitStack(&amp;S)：初始化栈。构造一个空栈 S，分配内存空间。<br>DestroyStack(&amp;S)：销毁栈。销毁并释放栈 S 所占用的内存空间。<br>Push(&amp;S,x)：进栈，若栈S未满，则将x加入使之成为新栈顶。<br>Pop(&amp;S,&amp;x)：出栈，若栈S非空，则弹出栈顶元素，并用x返回。<br>GetTop(S, &amp;x)：读栈顶元素。若栈 S 非空，则用 x 返回栈顶元素<br>其他常用操作：<br>StackEmpty(S)：判断一个栈 S 是否为空。若S为空，则返回true，否则返回false。</p>
+<blockquote>
+<h3 id="栈的常考题型"><a href="#栈的常考题型" class="headerlink" title="栈的常考题型"></a>栈的常考题型<img src="https://upload-images.jianshu.io/upload_images/18479331-1bc76a7a851daead.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="栈的常考题型"></h3></blockquote>
+<h2 id="2、栈的顺序存储结构"><a href="#2、栈的顺序存储结构" class="headerlink" title="2、栈的顺序存储结构"></a>2、栈的顺序存储结构</h2><h4 id="顺序栈的定义"><a href="#顺序栈的定义" class="headerlink" title="顺序栈的定义"></a>顺序栈的定义<img src="https://upload-images.jianshu.io/upload_images/18479331-a44ce2920de8df43.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="顺序栈的定义"></h4><h4 id="初始化操作"><a href="#初始化操作" class="headerlink" title="初始化操作"></a>初始化操作<img src="https://upload-images.jianshu.io/upload_images/18479331-0f954d52ce8bb6a8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="初始化操作"></h4><h4 id="进栈操作"><a href="#进栈操作" class="headerlink" title="进栈操作"></a>进栈操作<img src="https://upload-images.jianshu.io/upload_images/18479331-99a3df8faafa3d70.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="进栈操作"></h4><h4 id="出栈操作"><a href="#出栈操作" class="headerlink" title="出栈操作"></a>出栈操作<img src="https://upload-images.jianshu.io/upload_images/18479331-25e2bed27e94c4d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="出栈操作"></h4><h4 id="读栈顶元素操作"><a href="#读栈顶元素操作" class="headerlink" title="读栈顶元素操作"></a>读栈顶元素操作<img src="https://upload-images.jianshu.io/upload_images/18479331-1fdb9566cae59df3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="读栈顶元素操作"></h4><h4 id="共享栈：两个栈共用同一片空间。"><a href="#共享栈：两个栈共用同一片空间。" class="headerlink" title="共享栈：两个栈共用同一片空间。"></a>共享栈：两个栈共用同一片空间。<img src="https://upload-images.jianshu.io/upload_images/18479331-d7e4e5f938c1cbda.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="共享栈"></h4><h4 id="重要考点"><a href="#重要考点" class="headerlink" title="重要考点"></a>重要考点<img src="https://upload-images.jianshu.io/upload_images/18479331-291ed9a8cc0835e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="重要考点"></h4><h2 id="3、栈的链式存储结构"><a href="#3、栈的链式存储结构" class="headerlink" title="3、栈的链式存储结构"></a>3、栈的链式存储结构</h2><ul>
+<li>在链表中，头插法建立单链表对应着链栈的进栈</li>
+<li>在链表中，单链表的删除操作对应着链栈的出栈<h3 id="链栈的定义"><a href="#链栈的定义" class="headerlink" title="链栈的定义"></a>链栈的定义<img src="https://upload-images.jianshu.io/upload_images/18479331-90ae36ea48057c15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="链栈的定义"></h3><h4 id="重要考点-1"><a href="#重要考点-1" class="headerlink" title="重要考点"></a>重要考点<img src="https://upload-images.jianshu.io/upload_images/18479331-e60cfe665f0e9101.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="重要考点"></h4></li>
+</ul>
+<h1 id="二、队列"><a href="#二、队列" class="headerlink" title="二、队列"></a>二、队列</h1><h2 id="1、队列的基本概念"><a href="#1、队列的基本概念" class="headerlink" title="1、队列的基本概念"></a>1、队列的基本概念</h2><h4 id="队列的定义："><a href="#队列的定义：" class="headerlink" title="队列的定义："></a>队列的定义：</h4><p>线性表是具有相同数据类型的n（n≥0）个数据元素的有限 序列，其中n为表长，当n = 0时线<br>性表是一个空表。若用L命名线性表，则其一般表示为<br>L = (a1, a2, … , ai, ai+1, … , an)<br>栈（Stack）是只允许在一端进行插入或删除操作的线性表。<br>队列（Queue）是只允许在一端进行插入，在另一端删除的线性表。</p>
+<h4 id="队列的基本操作"><a href="#队列的基本操作" class="headerlink" title="队列的基本操作"></a>队列的基本操作</h4><p>InitQueue(&amp;Q)：初始化队列，构造一个空队列Q。<br>DestroyQueue(&amp;Q)：销毁队列。销毁并释放队列Q所占用的内存空间。<br>EnQueue(&amp;Q,x)：入队，若队列Q未满，将x加入，使之成为新的队尾。<br>DeQueue(&amp;Q,&amp;x)：出队，若队列Q非空，删除队头元素，并用x返回。<br>GetHead(Q,&amp;x)：读队头元素，若队列Q非空，则将队头元素赋值给x。</p>
+<ul>
+<li>其他常用操作<br>QueueEmpty(Q)：判队列空，若队列Q为空返回true，否则返回false。<h4 id="重要考点-2"><a href="#重要考点-2" class="headerlink" title="重要考点"></a>重要考点<img src="https://upload-images.jianshu.io/upload_images/18479331-464854a2164bfa80.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="重要考点"></h4></li>
+</ul>
+<h2 id="2、队列的顺序存储结构"><a href="#2、队列的顺序存储结构" class="headerlink" title="2、队列的顺序存储结构"></a>2、队列的顺序存储结构</h2><h4 id="初始化操作-1"><a href="#初始化操作-1" class="headerlink" title="初始化操作"></a>初始化操作<img src="https://upload-images.jianshu.io/upload_images/18479331-1f4d5274bec28cd3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="初始化操作"></h4><h4 id="入队操作"><a href="#入队操作" class="headerlink" title="入队操作"></a>入队操作<img src="https://upload-images.jianshu.io/upload_images/18479331-989df64e45e5ca6f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="入队操作"></h4><h4 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列<img src="https://upload-images.jianshu.io/upload_images/18479331-ae5af34b0201e34b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="循环队列"></h4><h4 id="循环队列的入队操作"><a href="#循环队列的入队操作" class="headerlink" title="循环队列的入队操作"></a>循环队列的入队操作<img src="https://upload-images.jianshu.io/upload_images/18479331-6975ccab8a1927d3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="循环队列入队操作"></h4><h4 id="重要考点-3"><a href="#重要考点-3" class="headerlink" title="重要考点"></a>重要考点<img src="https://upload-images.jianshu.io/upload_images/18479331-81894849a45c22fd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="重要考点"></h4><h2 id="3、队列的链式存储结构"><a href="#3、队列的链式存储结构" class="headerlink" title="3、队列的链式存储结构"></a>3、队列的链式存储结构</h2><h4 id="链式队列实现"><a href="#链式队列实现" class="headerlink" title="链式队列实现"></a>链式队列实现<img src="https://upload-images.jianshu.io/upload_images/18479331-079ffef6dee2f735.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="链式队列"></h4><h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><ul>
+<li>带头结点<img src="https://upload-images.jianshu.io/upload_images/18479331-35920e4605c0fa42.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="带头结点初始化"></li>
+<li>不带头结点<img src="https://upload-images.jianshu.io/upload_images/18479331-f7841eda8fac51d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="不带头结点初始化"><h4 id="入队操作-1"><a href="#入队操作-1" class="headerlink" title="入队操作"></a>入队操作</h4></li>
+<li>带头结点<img src="https://upload-images.jianshu.io/upload_images/18479331-c700be0f2a07c508.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="带头结点的入队操作"></li>
+<li>不带头结点<img src="https://upload-images.jianshu.io/upload_images/18479331-58ba187d222b08c6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="不带头结点的入队操作"><h4 id="出队操作"><a href="#出队操作" class="headerlink" title="出队操作"></a>出队操作</h4></li>
+<li>带头结点<img src="https://upload-images.jianshu.io/upload_images/18479331-18154e9c2ed8ad96.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="带头结点的出队操作"></li>
+<li>不带头结点<img src="https://upload-images.jianshu.io/upload_images/18479331-2d4253f461b31cf3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="不带头结点的出队操作"><h4 id="队列满的条件"><a href="#队列满的条件" class="headerlink" title="队列满的条件"></a>队列满的条件</h4></li>
+<li>链式存储——一般不会队满，除非内存不足。<h4 id="重要考点-4"><a href="#重要考点-4" class="headerlink" title="重要考点"></a>重要考点<img src="https://upload-images.jianshu.io/upload_images/18479331-350c9d033fc8105b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="重要考点"></h4></li>
+</ul>
+<h2 id="4、双端队列"><a href="#4、双端队列" class="headerlink" title="4、双端队列"></a>4、双端队列</h2><h4 id="双端队列图示"><a href="#双端队列图示" class="headerlink" title="双端队列图示"></a>双端队列图示<img src="https://upload-images.jianshu.io/upload_images/18479331-d3b7adbbfec61b42.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="双端队列"></h4><h4 id="受限制的双端队列"><a href="#受限制的双端队列" class="headerlink" title="受限制的双端队列"></a>受限制的双端队列<img src="https://upload-images.jianshu.io/upload_images/18479331-a4f0af6c9f9a48d0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="受限制双端队列"></h4><blockquote>
+<h4 id="考点：-判断输出序列合法性"><a href="#考点：-判断输出序列合法性" class="headerlink" title="考点：  判断输出序列合法性"></a>考点：  判断输出序列合法性</h4></blockquote>
+<h4 id="重要考点-5"><a href="#重要考点-5" class="headerlink" title="重要考点"></a>重要考点<img src="https://upload-images.jianshu.io/upload_images/18479331-e2b1152f584f2a34.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="重要考点"></h4><h1 id="三、栈和队列的应用"><a href="#三、栈和队列的应用" class="headerlink" title="三、栈和队列的应用"></a>三、栈和队列的应用</h1><h2 id="1、栈在括号匹配中的应用"><a href="#1、栈在括号匹配中的应用" class="headerlink" title="1、栈在括号匹配中的应用"></a>1、栈在括号匹配中的应用</h2><h4 id="括号匹配问题"><a href="#括号匹配问题" class="headerlink" title="括号匹配问题"></a>括号匹配问题<img src="https://upload-images.jianshu.io/upload_images/18479331-6b6b05832e6acd12.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="括号匹配"></h4><h4 id="算法思路图示"><a href="#算法思路图示" class="headerlink" title="算法思路图示"></a>算法思路图示<img src="https://upload-images.jianshu.io/upload_images/18479331-1fe00ca8b8d21359.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="算法图示"></h4><h4 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现 "></a>算法实现 <img src="https://upload-images.jianshu.io/upload_images/18479331-cbc09eedfea6f6c9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="算法实现"></h4><blockquote>
+<h3 id="重要考点-6"><a href="#重要考点-6" class="headerlink" title="重要考点"></a>重要考点</h3><p>用栈实现括号匹配：<br>依次扫描所有字符，遇到左括号入栈，遇到右括号则弹出栈顶元素检查是否匹配。<br>匹配失败情况：<br>①左括号单身②右括号单身③左右括号不匹配</p>
+</blockquote>
+<h2 id="2、栈在表达式求值中的应用"><a href="#2、栈在表达式求值中的应用" class="headerlink" title="2、栈在表达式求值中的应用"></a>2、栈在表达式求值中的应用</h2><p>算数表达式由三个部分组成：操作数、运算符、界限符(界限符是必不可少的，反映了计算的先后顺序)<br>常用的算术表达式都是中缀表达式，在此基础上，人们转化了前缀表达式和后缀表达式</p>
+<ul>
+<li>中缀表达式：运算符在两个操作数中间。</li>
+<li>前缀表达式：运算符在两个操作数前面。</li>
+<li>后缀表达式：运算符在两个操作数后面。<br>中缀转后缀的手算方法：<br>① 确定中缀表达式中各个运算符的运算顺序。<br>② 选择下一个运算符，按照「左操作数 右操作数 运算符」的方式组合成一个新的操作数。<br>③ 如果还有运算符没被处理，就继续 ②。<br>后缀表达式的手算方法：<br>从左往右扫描，每遇到一个运算符，就让运算符前面最近的两个操作数执行对应运算，合体为一个操作数。<br>注意：两个操作数的左右顺序。<br>用栈实现后缀表达式的计算（计算机）：<br>①从左往右扫描下一个元素，直到处理完所有元素<br>②若扫描到操作数则压入栈，并回到①；否则执行③<br>③若扫描到运算符，则弹出两个栈顶元素，执行相应运算，运算结果压回栈顶，回到①<br>中缀转前缀的手算方法：<br>① 确定中缀表达式中各个运算符的运算顺序<br>② 选择下一个运算符，按照「运算符 左操作数 右操作数」的方式组合成一个新的操作数<br>③ 如果还有运算符没被处理，就继续 ②</li>
+<li>“右优先”原则：只要右边的运算符能先计算，就优先算右边的。<h4 id="重要考点-7"><a href="#重要考点-7" class="headerlink" title="重要考点"></a>重要考点<img src="https://upload-images.jianshu.io/upload_images/18479331-8d4b8c25eb1bac51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="重要考点"></h4></li>
+</ul>
+<h2 id="3、栈在递归中的应用"><a href="#3、栈在递归中的应用" class="headerlink" title="3、栈在递归中的应用"></a>3、栈在递归中的应用</h2><h4 id="函数调用的过程"><a href="#函数调用的过程" class="headerlink" title="函数调用的过程"></a>函数调用的过程<img src="https://upload-images.jianshu.io/upload_images/18479331-ce54eeed9ec7259f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="函数调用"></h4><h4 id="重要考点-8"><a href="#重要考点-8" class="headerlink" title="重要考点"></a>重要考点</h4><blockquote>
+<p>函数调用的特点：最后被调用的函数最先执行结束（LIFO）<br>函数调用时，需要用一个“函数调用栈” 存储：<br>① 调用返回地址<br>② 实参<br>③ 局部变量<br>递归调用时，函数调用栈可称为“递归工作栈”<br>每进入一层递归，就将递归调用所需信息压入栈顶<br>每退出一层递归，就从栈顶弹出相应信息</p>
+<ul>
+<li>缺点：效率低，太多层递归可能会导致栈溢出；可能包含很多重复计算</li>
+</ul>
+</blockquote>
+<h2 id="4、队列在层次遍历中的应用"><a href="#4、队列在层次遍历中的应用" class="headerlink" title="4、队列在层次遍历中的应用"></a>4、队列在层次遍历中的应用</h2><p>该过程简单的描述如下：<br>① 根节点入队。<br>② 若队空（所有节点都已经处理完毕），则遍历结束；否则重复③操作。<br>③ 队列中第一个节点出队，并访问之。若其有左孩子，则将左孩子入队，若其有右孩子，则将右孩子入队，返回②。<br><img src="https://upload-images.jianshu.io/upload_images/18479331-d4ed0cc9882c6546.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="二叉树"><br>上图二叉树的层次遍历过程如下<br>序|说明|队内|队外<br>:–:|:–:|:–:|:–:<br>1|1入队|1|<br>2|1出队，2、3入队|2、3|1<br>3|2出队，4、5入队|3、4、5|1、2<br>4|3出队，6、7入队|4、5、6、7|1、2、3<br>5|4出队|5、6、7|1、2、3、4<br>6|5出队，8、9入队|6、7、8、9|1、2、3、4、5<br>7|6出队|7、8、9|1、2、3、4、5、6<br>8|….|….|….</p>
+<h2 id="5、队列在计算机系统中的应用"><a href="#5、队列在计算机系统中的应用" class="headerlink" title="5、队列在计算机系统中的应用"></a>5、队列在计算机系统中的应用</h2><p>多个进程争抢着使用有限的系统资源时，FCFS（First Come First Service，先来先服务）是一种常用策略。</p>
+<h1 id="四、特殊矩阵的压缩方式"><a href="#四、特殊矩阵的压缩方式" class="headerlink" title="四、特殊矩阵的压缩方式"></a>四、特殊矩阵的压缩方式</h1><h2 id="1、数组的定义"><a href="#1、数组的定义" class="headerlink" title="1、数组的定义"></a>1、数组的定义</h2><p>数组是由n个相同类型的数据元素构成的有限序列，每个数据元素称为一个数组元素，每个元素在n个线性关系中的序号称之为该元素的下标，下标的取值范围称为数组的维界。</p>
+<h2 id="2、数组的储存结构"><a href="#2、数组的储存结构" class="headerlink" title="2、数组的储存结构"></a>2、数组的储存结构</h2><p><img src="https://upload-images.jianshu.io/upload_images/18479331-09d380c1939b1aab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="数组储存结构"></p>
+<p>各数组元素大小相同，且物理上连续存放。<br>数组元素a[i] 的存放地址 = LOC + i * sizeof(ElemType) (0≤i&lt;10)</p>
+<h2 id="3、矩阵的压缩储存"><a href="#3、矩阵的压缩储存" class="headerlink" title="3、矩阵的压缩储存"></a>3、矩阵的压缩储存</h2><h4 id="普通矩阵的存储"><a href="#普通矩阵的存储" class="headerlink" title="普通矩阵的存储"></a>普通矩阵的存储</h4><p>可用二维数组存储某些特殊矩阵可以压缩存储空间。</p>
+<ul>
+<li>注意：描述矩阵元素时，行、列号通常从 1 开始；而描述数组时通常下标从0开始<br>（具体看题目给的条件，注意审题！）<h4 id="对称矩阵的压缩存储"><a href="#对称矩阵的压缩存储" class="headerlink" title="对称矩阵的压缩存储"></a>对称矩阵的压缩存储</h4>若 n 阶方阵中任意一个元素 ai,j都有 ai,j = aj,i<br>则该矩阵为对称矩阵<br>下三角区：i&gt;j<br>上三角区：i&lt;j<br>主对角线：i=j<br>普通存储：n*n 二维数组<br>压缩存储策略：只存储主对角线+下三角区（或主对角线+上三角区）<br>策略：只存储主对角线+下三角区，按行优先原则将各元素存入一维数组中。<h4 id="三角矩阵的压缩存储"><a href="#三角矩阵的压缩存储" class="headerlink" title="三角矩阵的压缩存储"></a>三角矩阵的压缩存储</h4>下三角矩阵：除了主对角线和下三角区，其余的元素都相同。<br>上三角矩阵：除了主对角线和上三角区，其余的元素都相同。<br>压缩存储策略：按行优先原则将橙色区元素存入一维数组中。并在最后一个位置存储常量c。<h4 id="三对角矩阵的压缩存储"><a href="#三对角矩阵的压缩存储" class="headerlink" title="三对角矩阵的压缩存储"></a>三对角矩阵的压缩存储</h4>三对角矩阵，又称带状矩阵：<br>当 |i - j|&gt;1 时，有 ai,j = 0 （1≤ i, j ≤n）<br>压缩存储策略：<br>按行优先（或列优先）原则，只存储带状部分。<h2 id="4、稀疏矩阵"><a href="#4、稀疏矩阵" class="headerlink" title="4、稀疏矩阵"></a>4、稀疏矩阵</h2>非零元素远远少于矩阵元素的个数<br>压缩存储策略：<br>顺序存储——三元组 &lt;行，列，值&gt;<h2 id="5、考点回顾"><a href="#5、考点回顾" class="headerlink" title="5、考点回顾"></a>5、考点回顾<img src="https://upload-images.jianshu.io/upload_images/18479331-8b1c1af41b0435a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="考点回顾"></h2></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Shea Chen</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://gitee.com/chen-xin-99/personal-blog/2021/08/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/">https://gitee.com/chen-xin-99/personal-blog/2021/08/15/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://gitee.com/chen-xin-99/personal-blog" target="_blank">Shea Chen</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/personal-blog/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a><a class="post-meta__tags" href="/personal-blog/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a></div><div class="post_share"><div class="social-share" data-image="/personal-blog/picture/158.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/personal-blog/2021/08/06/LeetCode-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/"><img class="next-cover" src="/personal-blog/picture/1.jpg" onerror="onerror=null;src='/personal-blog/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">LeetCode--两数之和</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%A0%88"><span class="toc-number">1.</span> <span class="toc-text">一、栈</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E6%A0%88%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.1.</span> <span class="toc-text">1、栈的基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">1.1.1.</span> <span class="toc-text">栈的基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88%E7%9A%84%E5%B8%B8%E8%80%83%E9%A2%98%E5%9E%8B"><span class="toc-number">1.1.2.</span> <span class="toc-text">栈的常考题型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E6%A0%88%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.</span> <span class="toc-text">2、栈的顺序存储结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E6%A0%88%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">顺序栈的定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E6%93%8D%E4%BD%9C"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">初始化操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E6%A0%88%E6%93%8D%E4%BD%9C"><span class="toc-number">1.2.0.3.</span> <span class="toc-text">进栈操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BA%E6%A0%88%E6%93%8D%E4%BD%9C"><span class="toc-number">1.2.0.4.</span> <span class="toc-text">出栈操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%BB%E6%A0%88%E9%A1%B6%E5%85%83%E7%B4%A0%E6%93%8D%E4%BD%9C"><span class="toc-number">1.2.0.5.</span> <span class="toc-text">读栈顶元素操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B1%E4%BA%AB%E6%A0%88%EF%BC%9A%E4%B8%A4%E4%B8%AA%E6%A0%88%E5%85%B1%E7%94%A8%E5%90%8C%E4%B8%80%E7%89%87%E7%A9%BA%E9%97%B4%E3%80%82"><span class="toc-number">1.2.0.6.</span> <span class="toc-text">共享栈：两个栈共用同一片空间。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E8%80%83%E7%82%B9"><span class="toc-number">1.2.0.7.</span> <span class="toc-text">重要考点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E6%A0%88%E7%9A%84%E9%93%BE%E5%BC%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-number">1.3.</span> <span class="toc-text">3、栈的链式存储结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E6%A0%88%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">1.3.1.</span> <span class="toc-text">链栈的定义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E8%80%83%E7%82%B9-1"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">重要考点</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E9%98%9F%E5%88%97"><span class="toc-number">2.</span> <span class="toc-text">二、队列</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E9%98%9F%E5%88%97%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">2.1.</span> <span class="toc-text">1、队列的基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%9F%E5%88%97%E7%9A%84%E5%AE%9A%E4%B9%89%EF%BC%9A"><span class="toc-number">2.1.0.1.</span> <span class="toc-text">队列的定义：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%9F%E5%88%97%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">2.1.0.2.</span> <span class="toc-text">队列的基本操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E8%80%83%E7%82%B9-2"><span class="toc-number">2.1.0.3.</span> <span class="toc-text">重要考点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E9%98%9F%E5%88%97%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-number">2.2.</span> <span class="toc-text">2、队列的顺序存储结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E6%93%8D%E4%BD%9C-1"><span class="toc-number">2.2.0.1.</span> <span class="toc-text">初始化操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%A5%E9%98%9F%E6%93%8D%E4%BD%9C"><span class="toc-number">2.2.0.2.</span> <span class="toc-text">入队操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97"><span class="toc-number">2.2.0.3.</span> <span class="toc-text">循环队列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E9%98%9F%E5%88%97%E7%9A%84%E5%85%A5%E9%98%9F%E6%93%8D%E4%BD%9C"><span class="toc-number">2.2.0.4.</span> <span class="toc-text">循环队列的入队操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E8%80%83%E7%82%B9-3"><span class="toc-number">2.2.0.5.</span> <span class="toc-text">重要考点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E9%98%9F%E5%88%97%E7%9A%84%E9%93%BE%E5%BC%8F%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-number">2.3.</span> <span class="toc-text">3、队列的链式存储结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%93%BE%E5%BC%8F%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.3.0.1.</span> <span class="toc-text">链式队列实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">2.3.0.2.</span> <span class="toc-text">初始化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%A5%E9%98%9F%E6%93%8D%E4%BD%9C-1"><span class="toc-number">2.3.0.3.</span> <span class="toc-text">入队操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BA%E9%98%9F%E6%93%8D%E4%BD%9C"><span class="toc-number">2.3.0.4.</span> <span class="toc-text">出队操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%9F%E5%88%97%E6%BB%A1%E7%9A%84%E6%9D%A1%E4%BB%B6"><span class="toc-number">2.3.0.5.</span> <span class="toc-text">队列满的条件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E8%80%83%E7%82%B9-4"><span class="toc-number">2.3.0.6.</span> <span class="toc-text">重要考点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97"><span class="toc-number">2.4.</span> <span class="toc-text">4、双端队列</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97%E5%9B%BE%E7%A4%BA"><span class="toc-number">2.4.0.1.</span> <span class="toc-text">双端队列图示</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%97%E9%99%90%E5%88%B6%E7%9A%84%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97"><span class="toc-number">2.4.0.2.</span> <span class="toc-text">受限制的双端队列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%80%83%E7%82%B9%EF%BC%9A-%E5%88%A4%E6%96%AD%E8%BE%93%E5%87%BA%E5%BA%8F%E5%88%97%E5%90%88%E6%B3%95%E6%80%A7"><span class="toc-number">2.4.0.3.</span> <span class="toc-text">考点：  判断输出序列合法性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E8%80%83%E7%82%B9-5"><span class="toc-number">2.4.0.4.</span> <span class="toc-text">重要考点</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">三、栈和队列的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E6%A0%88%E5%9C%A8%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">3.1.</span> <span class="toc-text">1、栈在括号匹配中的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98"><span class="toc-number">3.1.0.1.</span> <span class="toc-text">括号匹配问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%80%9D%E8%B7%AF%E5%9B%BE%E7%A4%BA"><span class="toc-number">3.1.0.2.</span> <span class="toc-text">算法思路图示</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.1.0.3.</span> <span class="toc-text">算法实现 </span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E8%80%83%E7%82%B9-6"><span class="toc-number">3.1.1.</span> <span class="toc-text">重要考点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E6%A0%88%E5%9C%A8%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">3.2.</span> <span class="toc-text">2、栈在表达式求值中的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E8%80%83%E7%82%B9-7"><span class="toc-number">3.2.0.1.</span> <span class="toc-text">重要考点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E6%A0%88%E5%9C%A8%E9%80%92%E5%BD%92%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">3.3.</span> <span class="toc-text">3、栈在递归中的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="toc-number">3.3.0.1.</span> <span class="toc-text">函数调用的过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E8%80%83%E7%82%B9-8"><span class="toc-number">3.3.0.2.</span> <span class="toc-text">重要考点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E9%98%9F%E5%88%97%E5%9C%A8%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">3.4.</span> <span class="toc-text">4、队列在层次遍历中的应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E9%98%9F%E5%88%97%E5%9C%A8%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">3.5.</span> <span class="toc-text">5、队列在计算机系统中的应用</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%89%B9%E6%AE%8A%E7%9F%A9%E9%98%B5%E7%9A%84%E5%8E%8B%E7%BC%A9%E6%96%B9%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text">四、特殊矩阵的压缩方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E6%95%B0%E7%BB%84%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">4.1.</span> <span class="toc-text">1、数组的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E6%95%B0%E7%BB%84%E7%9A%84%E5%82%A8%E5%AD%98%E7%BB%93%E6%9E%84"><span class="toc-number">4.2.</span> <span class="toc-text">2、数组的储存结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E7%9F%A9%E9%98%B5%E7%9A%84%E5%8E%8B%E7%BC%A9%E5%82%A8%E5%AD%98"><span class="toc-number">4.3.</span> <span class="toc-text">3、矩阵的压缩储存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E7%9F%A9%E9%98%B5%E7%9A%84%E5%AD%98%E5%82%A8"><span class="toc-number">4.3.0.1.</span> <span class="toc-text">普通矩阵的存储</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E7%A7%B0%E7%9F%A9%E9%98%B5%E7%9A%84%E5%8E%8B%E7%BC%A9%E5%AD%98%E5%82%A8"><span class="toc-number">4.3.0.2.</span> <span class="toc-text">对称矩阵的压缩存储</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E8%A7%92%E7%9F%A9%E9%98%B5%E7%9A%84%E5%8E%8B%E7%BC%A9%E5%AD%98%E5%82%A8"><span class="toc-number">4.3.0.3.</span> <span class="toc-text">三角矩阵的压缩存储</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E5%AF%B9%E8%A7%92%E7%9F%A9%E9%98%B5%E7%9A%84%E5%8E%8B%E7%BC%A9%E5%AD%98%E5%82%A8"><span class="toc-number">4.3.0.4.</span> <span class="toc-text">三对角矩阵的压缩存储</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E7%A8%80%E7%96%8F%E7%9F%A9%E9%98%B5"><span class="toc-number">4.4.</span> <span class="toc-text">4、稀疏矩阵</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E8%80%83%E7%82%B9%E5%9B%9E%E9%A1%BE"><span class="toc-number">4.5.</span> <span class="toc-text">5、考点回顾</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Shea Chen</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a target="_blank" rel="noopener" href="https://butterfly.js.org/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/personal-blog/js/utils.js"></script><script src="/personal-blog/js/main.js"></script><script src="/personal-blog/js/tw_cn.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '',
+      appKey: '',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'en',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
